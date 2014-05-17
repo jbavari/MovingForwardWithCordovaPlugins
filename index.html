@@ -31,6 +31,61 @@
 			}
 		</script>
 
+		<style type="text/css">
+            /*.reveal .state-background  {
+                background-image: url(https://s3.amazonaws.com/uploads.hipchat.com/41403/429435/YgVwok4JIb4sHUr/grunt-slide-idea.jpg);
+                background-repeat: no-repeat;
+                background-color: #262A2D;
+                background-size: 100%;
+            }*/
+            ul.automate {
+                float: left; 
+                width: 40%; 
+                list-style-type: none !important;
+            }
+
+            ul.automate:first {
+                margin-left: 20%;
+            }
+
+            .grunt_orange {
+                color: #e48632;
+            }
+
+            .reveal pre {
+                font-size: 1.1em !important;
+            }
+
+            #edit_changes {
+                color: #4C2CC0;
+                margin: 5px;
+                padding: 30px;
+                font-size: 1.3em;
+                border-radius: 15px;
+                box-shadow: 2px 2px #e48632;
+                outline: 0;
+            }
+            pre, code {
+            	width: 100%;
+            }
+
+            #code_highlight {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            #code_highlight pre, #code_highlight code {
+                height: 100%;
+                width: 100%;
+                font-size: 1.5em;
+                overflow: auto;
+            }
+        </style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -43,7 +98,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>Moving Forward With Cordova Plugins</h3>
+					<img src="css/sponsors.png" />
+				</section>
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Moving Forward With Phonegap/Cordova Plugins</h3>
 					<p>
 						<small>Created by <a href="http://jbavari.github.io">Josh Bavari</a> / <a href="http://twitter.com/jbavari">@jbavari</a></small>
 					</p>
@@ -53,27 +111,40 @@
 					<h3>Why am I talking to you?</h3>
 
 					<ul>
-						<li>You want to build a mobile app</li>
+						<li>You've chosen to build a mobile app with Phonegap/Cordova</li>
 						<li>You want to reuse the code base on multiple platforms</li>
 						<li>You need to use some native code for specific devices</li>
 						<li>You need a quick start to developing native plugins</li>
-						<li>You want to see whats hardships are involved with Cordova/Phonegap</li>
+						<li>You want to see whats hardships are involved with plugins</li>
 					</ul>
 				</section>
 
 				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h2>What this talk is not</h2>
+					<h2>Not trying to convince you of hybrid</h2>
 
-					<p>My assumption is you've already chosen to have a hybrid application and youre wanting to know/understand how Cordova / Phonegap interacts with the native plugins.</p>
+					<p>My assumption is you've already chosen to have a hybrid application &amp; youre wanting to know/understand how Cordova / Phonegap interacts with native plugins.</p>
 
 					<br />
 
-					<h4>I recommend you go see <a href="http://www.kcdc.info/sessions/52cf5d2672d5cb020082774c">Hybrid vs Native: Choosing a Mobile Strategy by Jeff French @ 3:20</a></h4>
+					<h4>Want to know why to choose Phonegap/Cordova?</h4>
+					<h4>Go see <a href="http://www.kcdc.info/sessions/52cf5d2672d5cb020082774c">Hybrid vs Native: Choosing a Mobile Strategy by Jeff French @ 3:20</a></h4>
 
 				</section>
 
 				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>Cordova Clarification</h3>
+					<h3>What I am talking to you about</h3>
+
+					<ul>
+						<li>What Cordova &amp; Phonegap is</li>
+						<li>State of Phonegap/Cordova &amp; Plugins</li>
+						<li>Anatomy of Plugins</li>
+						<li>Development lifecycle of Plugins</li>
+						<li>Publishing Plugins</li>
+					</ul>
+				</section>				
+
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Cordova = Phonegap</h3>
 
 					<ul>
 						<li>Cordova is the tech that bridges Javascript to native code</li>
@@ -85,46 +156,277 @@
 				</section>
 
 				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>A quick story</h3>
+					<h3>Cordova</h3>
 
-					<p>
-						Two years ago, we started RaiseMore, a mobile app &amp; platform to raise donations for charities. We already had an iOS app, but our devs were by no means native mobile developers.
-					</p>
+					<ul>
+						<li>Apache = 100% open source = FREE</li>
+						<li>Backed by Google, Adobe, IBM, &amp; now Microsoft</li>
+						<li>Widely accepted, community supported</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>What Phonegap adds</h3>
+
+					<img src="css/phonegap_build.png" />
+
+				</section>
+
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h2>State of Plugins</h2>
+				</section>
+
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Before - Cordova 1.x - 2.x</h3>
+
+					<ul>
+						<li>HTML/JS runs in Native WebView</li>
+						<li>WebView passes back javascript to handler</li>
+						<li>All core plugins (camera/contacts/etc) were included in source</li>
+						<li>Additional plugins copied (Obj-C / Java) files into project</li>
+						<li>Plugins generally found on Github</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova1.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Today - Cordova 3.x</h3>
+
+					<ul>
+						<li>HTML/JS still run in Native WebView</li>
+						<li>Must add any plugins you want to use</li>
+						<li>CLI tool used to add plugins (registry or git url)</li>
+						<li>Plugin javascript wrapped in module.exports</li>
+						<li>Additional plugins src can be copied (Obj-C / Java) into native project</li>
+					</ul>
 				</section>
 
 				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>What we first tried</h3>
+					<h3>Evolution</h3>
 
-					<p>
-						We first used a mobile dev shop to produce iOS &amp; Android versions / fixes / etc since we were busy with the web API. Got really expensive FAST.
-					</p>
+					<img src="css/cordova_plugin_diagram.png" />
 				</section>
 
 				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>Low budget, no budget, no problem</h3>
+					<h3>Anatomy of plugins</h3>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>How it works</h3>
+
+					<ul>
+						<li>Cordova WebView control handles Javascript / Native bridge</li>
+						<li>Javascript - cordova.exec handles interaction with WebView</li>
+						<li>Native class plugins communicate with Cordova WebView</li>
+						<li>Native plugin classes mapped via config.xml file</li>
+						<li>Plugins list methods available in plugin.xml file</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Cordova CLI &amp; project layout</h3>
+
+					<ul>
+						<li>cordova plugin add &lt;local path | git | ID&gt;</li>
+						<li>Plugins stored in root in `plugins` folder</li>
+						<li>In plugins, json files for each platform</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Key Players in Plugins</h3>
+
+					<ul>
+						<li>In iOS - base class of CDVPlugin</li>
+						<li>In Android - base class of CordovaPlugin</li>
+						<li>In Windows Phone - base class of BaseCommand</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>How Plugins Pass Data</h3>
+
+					<img src="css/cordova-seq.png" />
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Configurations</h3>
+
+					<ul>
+						<li>In root - config.xml specifies application config</li>
+						<li>Each platform as config.xml - specifies native plugin mapping</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Plugins each have Plugin.xml</h3>
 
 					<p>
-						We had two devs, decided to bring mobile dev in house. No time to maintain two separate code bases. Looked at PhoneGap, Titanium, &amp; Sencha touch. Decided to embrace Phonegap
+						Lets take a look at <a href="https://github.com/apache/cordova-plugin-device/blob/master/plugin.xml">The Device plugin's Plugin.xml file.</a> During this talk, we will be going over the Device plugin
 					</p>
+
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>One Javascript to rule them all</h3>
+
+					<pre><code data-trim contenteditable>
+Device.prototype.getInfo = function(successCallback, errorCallback) {
+    argscheck.checkArgs('fF', 'Device.getInfo', arguments);
+    exec(successCallback, errorCallback, "Device", "getDeviceInfo", []);
+};
+//The plugin result will tell us whether its successful or not, in which either success calback
+//or error callback will be called.
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>iOS</h3>
+
+					<pre><code data-trim contenteditable>
+// This command will set up a result to pass back through the CordovaWebView
+CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+
+//Communicates to Webview the result
+[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Android</h3>
+
+					<pre><code data-trim contenteditable>
+public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    if (action.equals("getDeviceInfo")) {
+        JSONObject r = new JSONObject();
+        r.put("uuid", Device.uuid);
+        r.put("version", this.getOSVersion());
+        r.put("platform", this.getPlatform());
+        r.put("cordova", Device.cordovaVersion);
+        r.put("model", this.getModel());
+        callbackContext.success(r);
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Windows Phone</h3>
+
+					<pre><code data-trim contenteditable>
+ public void getDeviceInfo(string notused)
+{
+
+    string res = String.Format("\"name\":\"{0}\",\"cordova\":\"{1}\",\"platform\":\"{2}\",\"uuid\":\"{3}\",\"version\":\"{4}\",\"model\":\"{5}\"",
+                                this.name,
+                                this.cordova,
+                                this.platform,
+                                this.uuid,
+                                this.version,
+                                this.model);
+
+    res = "{" + res + "}";
+    //Debug.WriteLine("Result::" + res);
+    DispatchCommandResult(new PluginResult(PluginResult.Status.OK, res));
+}
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
+				<section data-background="css/cordova2.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>iOS</h3>
+
+					<pre><code data-trim contenteditable>
+// This command will set up a result to pass back through the CordovaWebView
+CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+
+//Communicates to Webview the result
+[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>
+
+
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Debugging Strategies</h3>
 				</section>
 
 				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>How it turned out</h3>
+					<h3>Debugging iOS</h3>
 
-					<p>
-						Today we have an iOS app &amp; an Android app - running on the same code base, native plugins to handle other tasks HTML cannot handle, and reuse some of the code on the mobile web version in safari &amp; throughout our other web projects. Its AWESOME.
-					</p>
+					<ul>
+						<li>Logging in XCode</li>
+						<li>Using Safari - web inspector</li>
+					</ul>
 				</section>
 
-				<section data-background="css/cordova4.png" data-background-repeat="no-repeat" data-background-position="0 0">
-					<h3>Where it is today</h3>
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Debugging Android</h3>
 
-					<p>
-						Today with Phonegap/Cordova 3.x - everything is a plugin.
-					</p>
+					<ul>
+						<li>In Android 4.4+, Chrome DevTools</li>
+						<li>LogCat - filter Cordova</li>
+						<li>Pre Android 4.4, check out <a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">weinre</a></li>
+					</ul>
 				</section>
 
-				<section>
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Using Plugman</h3>
+
+					<pre><code data-trim contenteditable>
+//create base plugin
+plugman create --name Popups --plugin_id com.bavari.josh --plugin_version 1.0 
+
+//search for existing camera
+plugman search camera
+
+//create user to push to registry
+plugman adduser
+
+//publish plugin to official cordova registry
+plugman publish Popups
+					</code></pre>
+                    <button class="code_enlarge">Enlarge</button>
+				</section>			
+
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>A note about Phonegap Build plugsin</h3>
+
+					<ul>
+						<li>Plugins listed on Phonegap plugins page</li>
+						<li>List platforms/plugins in config.xml file</li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Places to find plugins</h3>
+
+					<ul>
+						<li>Using plugman search</li>
+						<li><a href="http://plugins.cordova.io">Cordova Registry</a></li>
+						<li><a href="http://plugreg.com/">Plugreg</a></li>
+						<li><a href="https://build.phonegap.com/plugins">Phonegap Plugins</a></li>
+						<li><a href="https://github.com/search?q=cordova-plugin&ref=cmdform">Searching Github</a></li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
+					<h3>Tools to aid you</h3>
+
+					<ul>
+						<li><a href="http://genymotion.com/">Genymotion - android emulation</a></li>
+						<li><a href="https://developer.apple.com/safari/tools/">Safari for Developers</a></li>
+						<li><a href="https://developer.chrome.com/devtools/docs/remote-debugging#debugging-webviews">Debugging Android WebViews</a></li>
+					</ul>
+				</section>
+
+				<section data-background="css/cordova3.png" data-background-repeat="no-repeat" data-background-position="0 0">
 					<h3>References</h3>
 
 					<ul>
@@ -133,9 +435,8 @@
 						<li><a href="http://academy.appgyver.com/categories/7/contents/82">Developing custom PhoneGap plugins</a></li>
 						<li><a href="http://teusink.blogspot.com/2013/07/guide-phonegap-3-android-windows.html">A guide to Phonegap 3 development for Android on Windows</a></li>
 						<li><a href="http://codrspace.com/vote539/writing-a-custom-camera-plugin-for-phonegap/">Writing a custom camera plugin for phonegap</a></li>
-						<li><a href=""></a></li>
-						<li><a href=""></a></li>
-						<li><a href=""></a></li>
+						<li><a href="https://www.npmjs.org/package/generator-cordova-plugin">Yeoman generator for Cordova Plugins</a></li>
+						<li><a href="http://devgirl.org/2013/09/17/how-to-write-a-phonegap-3-0-plugin-for-android/">How to write a phonegap 3.0 plugin for Android</a></li>
 					</ul>
 				</section>
 
@@ -145,6 +446,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery.js"></script>
 
 		<script>
 
@@ -173,8 +475,49 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+	        var codeHighlight = false;
+
+	        $(function(){
+	            $(document).on("click", "#edit_changes", function() {
+	                var edited_css = $("#edited_css").text();
+
+	                $.ajax({
+	                  type: "POST",
+	                  url: "/edit",
+	                  data: {css: edited_css},
+	                  success: function(){},
+	                  dataType: "json"
+	                })
+	            });
+
+	            $(document).on("click", ".code_enlarge", function(e) {
+	                var code = $(this).parent().find("code");
+	                $("#code_highlight").css("display", "block");
+	                $("#code_highlight").find("code").text(code.text());
+	                codeHighlight = true;
+	                hljs.highlightBlock($("#code_highlight").find("code")[0]);
+	                e.preventDefault();
+	                return false;
+	            });
+
+	            $(document).on("click", "#code_close", function(e){
+	                if(codeHighlight) {
+	                    $("#code_highlight").css("display", "none");
+	                    codeHighlight = false;
+	                }
+	                e.preventDefault();
+	                return false;
+	            });
+	        })
 
 		</script>
+
+        <div id="code_highlight" style="display: none">
+            <pre><code data-trim contenteditable>
+            </code></pre>
+
+            <button id="code_close" style="position: absolute; top: 0; right: 100px;">Close</button>
+        </div>
 
 	</body>
 </html>
